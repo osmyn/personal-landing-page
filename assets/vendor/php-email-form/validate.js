@@ -1,8 +1,3 @@
-/**
-* PHP Email Form Validation - v2.3
-* URL: https://bootstrapmade.com/php-email-form/
-* Author: BootstrapMade.com
-*/
 !(function($) {
   "use strict";
 
@@ -123,11 +118,37 @@
     return true;
   });
 
+  function getQueryVariable(variable, query) {
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    console.log('Query variable %s not found', variable);
+}
+
   function php_email_form_submit(this_form, action, data) {
+    var name = getQueryVariable('name', data);
+    var email = getQueryVariable('email', data);
+    var message = getQueryVariable('message', data);
+
+    var slack = {
+      response_type: "in_channel",
+      attachments: [
+        {
+          pretext: name,
+          title: `Email: ${email}`,
+          text: message
+        }
+      ]
+    };
+
     $.ajax({
       type: "POST",
-      url: action,
-      data: data,
+      url: "https://hooks.slack.com/services/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",
+      data: JSON.stringify(slack),
       timeout: 40000
     }).done( function(msg){
       if (msg.trim() == 'OK') {
