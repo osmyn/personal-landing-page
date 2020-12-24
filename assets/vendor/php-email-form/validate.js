@@ -147,11 +147,11 @@
 
     $.ajax({
       type: "POST",
-      url: "https://hooks.slack.com/services/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",
+      url: "https://hooks.slack.com/services/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",
       data: JSON.stringify(slack),
       timeout: 40000
     }).done( function(msg){
-      if (msg.trim() == 'OK') {
+      if (msg.trim() == 'ok') {
         this_form.find('.loading').slideUp();
         this_form.find('.sent-message').slideDown();
         this_form.find("input:not(input[type=submit]), textarea").val('');
