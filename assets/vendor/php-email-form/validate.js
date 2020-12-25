@@ -144,24 +144,31 @@
         }
       ]
     };
+    var url1 = "ht";
+    var url2 = "tps";
+    var url3 = ":/";
+    var url4 = "/otttslackfunc";
+    var url5 = ".azu";
+    var url6 = "rewebsites.n";
+    var url7 = "et/api/Contact"
 
     $.ajax({
       type: "POST",
-      url: "https://hooks.slack.com/services/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",
+      url:  url1 + url2 + url3 + url4 + url5 + url6 + url7,
       data: JSON.stringify(slack),
       timeout: 40000
     }).done( function(msg){
-      if (msg.trim() == 'ok') {
+      // if (msg.trim() == 'ok') {
         this_form.find('.loading').slideUp();
         this_form.find('.sent-message').slideDown();
         this_form.find("input:not(input[type=submit]), textarea").val('');
-      } else {
-        this_form.find('.loading').slideUp();
-        if(!msg) {
-          msg = 'Form submission failed and no error message returned from: ' + action + '<br>';
-        }
-        this_form.find('.error-message').slideDown().html(msg);
-      }
+      // } else {
+      //   this_form.find('.loading').slideUp();
+      //   if(!msg) {
+      //     msg = 'Form submission failed and no error message returned from: ' + action + '<br>';
+      //   }
+      //   this_form.find('.error-message').slideDown().html(msg);
+      // }
     }).fail( function(data){
       console.log(data);
       var error_msg = "Form submission failed!<br>";
